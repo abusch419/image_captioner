@@ -14,3 +14,5 @@ def get_caption(img_path):
     out = model.generate(**inputs, max_new_tokens=100)
     print(processor.decode(out[0], skip_special_tokens=True))
     return processor.decode(out[0], skip_special_tokens=True)
+
+get_caption(img_path)
