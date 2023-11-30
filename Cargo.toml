@@ -1,6 +1,6 @@
 [package]
 name = "rust_image_captioner"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2021"
 author = "Alex Eversbusch Rainsound.ai"
 description = "Create images for captions using a BLIP deep learning model."

@@ -10,6 +10,7 @@ pub enum CaptioningError {
     PythonExecutableNotFound,
     CommandExecutionFailed(io::Error),
     PythonScriptCopyFailed(std::io::Error), // Example variant with an associated error
+    InvalidImagePath,
 
 }
 
@@ -37,9 +38,11 @@ pub fn get_caption(image_path: &Path) -> Result<String, CaptioningError> {
         return Err(CaptioningError::ImageNotFound);
     }
 
+    let image_path_str = image_path.to_str().ok_or(CaptioningError::InvalidImagePath)?;
+
     let output = Command::new(&python_executable)
         .arg(&target_dir)  // Use the script from the target directory.
-        .arg(image_path)
+        .arg(image_path_str)  // Pass the image path as a string.
         .output()
         .map_err(CaptioningError::CommandExecutionFailed)?;
 

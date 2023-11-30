@@ -2,6 +2,7 @@
 run `cargo build` to add rust dependencies
 
 # Example Usage
+First make sure there's an image at the root of your directory. If it's called image.jpg here's how you can use rust_image_captioner:
 ```
 extern crate rust_image_captioner;
 

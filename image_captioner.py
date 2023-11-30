@@ -1,4 +1,4 @@
-# image_captioner.py
+import sys
 import requests
 from PIL import Image
 from transformers import BlipProcessor, BlipForConditionalGeneration
@@ -12,7 +12,13 @@ def get_caption(img_path):
     # unconditional image captioning
     inputs = processor(img, return_tensors="pt")
     out = model.generate(**inputs, max_new_tokens=100)
-    print(processor.decode(out[0], skip_special_tokens=True))
-    return processor.decode(out[0], skip_special_tokens=True)
+    caption = processor.decode(out[0], skip_special_tokens=True)
+    print(caption)
+    return caption
 
-get_caption(img_path)
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        img_path = sys.argv[1]  # Get the image path from the command line argument
+        get_caption(img_path)
+    else:
+        print("No image path provided.")
