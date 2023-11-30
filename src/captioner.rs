@@ -1,9 +1,7 @@
-// src/captioner.rs
-
-use std::path::Path;
-use which::which;
+use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::io;
+use std::fs;
 
 /// Error type for captioning-related errors.
 #[derive(Debug)]
@@ -11,30 +9,36 @@ pub enum CaptioningError {
     ImageNotFound,
     PythonExecutableNotFound,
     CommandExecutionFailed(io::Error),
+    PythonScriptCopyFailed(std::io::Error), // Example variant with an associated error
+
 }
 
-/// Get a caption for an image.
-///
-/// # Arguments
-///
-/// * `image_path` - A string slice representing the path to the image.
-///
-/// # Returns
-///
-/// * `Result<String, CaptioningError>` - A `Result` containing the caption or an error.
-pub fn get_caption(image_path: &str) -> Result<String, CaptioningError> {
-    let python_script = "./image_captioner.py";
-    let python_executable = match which("python3") {
+
+pub fn get_caption(image_path: &Path) -> Result<String, CaptioningError> {
+    // Determine the location of the Python script within the target directory.
+    let mut target_dir = PathBuf::from("./target");
+    target_dir.push("image_captioner.py");
+
+    // Check if the Python script exists in the target directory.
+    if !target_dir.exists() {
+        // If it doesn't exist, this is the first time it's being run.
+        // Copy the script from your crate's assets to the target directory.
+        let script_content = include_str!("../image_captioner.py");
+        fs::write(&target_dir, script_content)
+            .map_err(|e| CaptioningError::PythonScriptCopyFailed(e))?;
+    }
+
+    let python_executable = match which::which("python3") {
         Ok(path) => path,
         Err(_) => return Err(CaptioningError::PythonExecutableNotFound),
     };
 
-    if !Path::new(image_path).exists() {
+    if !image_path.exists() {
         return Err(CaptioningError::ImageNotFound);
     }
 
     let output = Command::new(&python_executable)
-        .arg(python_script)
+        .arg(&target_dir)  // Use the script from the target directory.
         .arg(image_path)
         .output()
         .map_err(CaptioningError::CommandExecutionFailed)?;
