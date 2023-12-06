@@ -1,6 +1,3 @@
-# Getting Started 
-run `cargo build` to add rust dependencies
-
 # Example Usage
 First make sure there's an image at the root of your directory. If it's called image.jpg here's how you can use image_captioner:
 ```
