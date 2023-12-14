@@ -2,10 +2,23 @@ import sys
 import requests
 from PIL import Image
 from transformers import BlipProcessor, BlipForConditionalGeneration
+import logging
+
+import os
+
+
+logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 def get_caption(img_path):
-    processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
-    model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
+    model_path = "Salesforce/blip-image-captioning-base"
+    # General cache directory
+    cache_dir = os.path.join(os.path.expanduser("~"), ".cache/huggingface")
+
+    # Rely on transformers library for caching
+    logging.info("🚨 Loading BLIP model.")
+    processor = BlipProcessor.from_pretrained(model_path, cache_dir=cache_dir)
+    model = BlipForConditionalGeneration.from_pretrained(model_path, cache_dir=cache_dir)
+    logging.info("🤗 Model loaded successfully.")
 
     img = Image.open(img_path)
 

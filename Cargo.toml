@@ -1,6 +1,6 @@
 [package]
 name = "image_captioner"
-version = "0.1.10"
+version = "0.1.11"
 edition = "2021"
 author = "Alex Eversbusch Rainsound.ai"
 description = "Create captions for images automatically using a BLIP deep learning model."
@@ -14,6 +14,7 @@ build = "setup_python.rs"
 maturin = "1.3.2"
 pyo3 = { version = "0.15", features = ["extension-module"] }
 which = "5.0.0"
+log = "0.4"
 
 [build-dependencies]
 which = "5.0"

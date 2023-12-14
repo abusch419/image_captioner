@@ -1,5 +1,5 @@
 use std::path::{Path, PathBuf};
-use std::process::Command;
+use std::process::{Command, Stdio};
 use std::io;
 use std::fs;
 
@@ -43,11 +43,14 @@ pub fn get_caption(image_path: &Path) -> Result<String, CaptioningError> {
     let output = Command::new(&python_executable)
         .arg(&target_dir)  // Use the script from the target directory.
         .arg(image_path_str)  // Pass the image path as a string.
+        .stdout(Stdio::piped())  // Capture standard output
+        .stderr(Stdio::piped())  // Capture standard error
         .output()
         .map_err(CaptioningError::CommandExecutionFailed)?;
 
     if output.status.success() {
         let caption = String::from_utf8_lossy(&output.stdout).to_string();
+        println!("{}", String::from_utf8_lossy(&output.stderr));
         Ok(caption)
     } else {
         let err = String::from_utf8_lossy(&output.stderr).to_string();
