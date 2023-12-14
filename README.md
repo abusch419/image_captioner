@@ -64,10 +64,3 @@ This location may vary based on your system configuration and environment settin
 
 ### Network Independence
 Since the image processing is done locally, `image_captioner` does not require an internet connection after the initial model download. This makes it suitable for use in environments with limited or no network access, once the model is downloaded and set up.
-
-### Performance Considerations
-Local processing means that the performance and speed of `image_captioner` are dependent on your machine's hardware capabilities. High-resolution images or a large number of images may require more processing time and resources.
-
-## Disclaimer: Limitations of Local Processing
-
-While local processing of machine learning models like `image_captioner` offers enhanced privacy and security, there are certain limitations to be aware of:

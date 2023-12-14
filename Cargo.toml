@@ -1,12 +1,13 @@
 [package]
 name = "image_captioner"
-version = "0.1.11"
+version = "0.2.0"
 edition = "2021"
 author = "Alex Eversbusch Rainsound.ai"
 description = "Create captions for images automatically using a BLIP deep learning model."
 license = "MIT OR Apache-2.0"
 credits = "Li, Junnan and Li, Dongxu and Xiong, Caiming and Hoi, Steven https://huggingface.co/Salesforce/blip-image-captioning-large"
 build = "setup_python.rs"
+repository = "https://github.com/abusch419/image_captioner.git"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
