@@ -14,7 +14,6 @@ pub enum CaptioningError {
 
 }
 
-
 pub fn get_caption(image_path: &Path) -> Result<String, CaptioningError> {
     // Determine the location of the Python script within the target directory.
     let mut target_dir = PathBuf::from("./target");
