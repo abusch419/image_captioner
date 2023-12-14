@@ -23,7 +23,7 @@ fn main() {
 - **License:** Released under the BSD-3-Clause License, allowing both personal and commercial use.
 - **Commercial Use:** Suitable for commercial projects, but always review the [license terms](https://huggingface.co/Salesforce/blip-image-captioning-base/blob/main/LICENSE) for full compliance.
 
-BLIP's architecture and capabilities make it a state-of-the-art choice for various vision-language tasks, including its ability to adapt to video-language tasks in a [zero-shot manner](https://towardsdatascience.com/understanding-zero-shot-learning-making-ml-more-human-4653ac35ccab).
+BLIP's architecture and capabilities make it a state-of-the-art choice for various vision-language tasks.
 
 ## Image Path Clarification
 

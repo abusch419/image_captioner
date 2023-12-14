@@ -1,6 +1,6 @@
 [package]
 name = "image_captioner"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 author = "Alex Eversbusch Rainsound.ai"
 description = "Create captions for images automatically using a BLIP deep learning model."
